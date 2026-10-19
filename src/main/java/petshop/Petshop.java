@@ -2,6 +2,8 @@ package petshop;
 
 import java.util.HashSet;
 
+import java.util.ArrayList;
+
 import java.util.InputMismatchException;
 
 import java.util.Scanner;
@@ -12,6 +14,10 @@ public class Petshop {
      String especie;
     double peso;
      String porte;
+
+    static void exibirFicha(Pet2 pet) {
+        System.out.println("Nome: " + pet.nome);
+    }
 
     static void main() {
 
@@ -102,7 +108,7 @@ public class Petshop {
         while (opcao != 0) { //enquanto a opção for diferente de 0 rodar tal coisa:
 
 
-            System.out.println("===PETSHOP===\n1- Cadastrar pet\n2- Listas pets\n3- Buscar pet\n4- Espécies cadastradas\n5- Fila de Banho\n0- Sair");
+            System.out.println("===PETSHOP===\n1- Cadastrar pet\n2- Listas pets\n3- Buscar pet\n4- Espécies cadastradas\n5- Fila de Banho\n6- Serviços\n0- Sair");
 
             try {
                 opcao = scanner.nextInt();
@@ -194,6 +200,22 @@ public class Petshop {
                         String nome = scanner.nextLine();
                         filaDeBanho.entrarNaFila(nome); // Chama o método que adiciona o pet
                         filaDeBanho.atenderProximo(); // Chama o método que criámos na classe FilaBanho
+                        break;
+
+                    case 6: // Substitui pelo número da opção que quiseres dar no menu
+                        System.out.print("Nome do pet: ");
+                        String nomePet = scanner.nextLine(); // Lê o nome do pet introduzido
+
+                        // Cria o ArrayList do tipo da interface Servico
+                        ArrayList<Servico> listaServicos = new ArrayList<>();
+                        listaServicos.add(new Banho());
+                        listaServicos.add(new Tosa());
+                        listaServicos.add(new Consulta());
+
+                        // Percorre a lista com um for-each executando o método de cada serviço
+                        for (Servico servico : listaServicos) {
+                            servico.executar(nomePet);
+                        }
                         break;
 
 
